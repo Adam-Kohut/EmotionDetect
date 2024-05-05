@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">YOLOv8 TfLite</string>
+    <string name="title_quote">Privacy breached: Tracking feelings, not just faces.</string>
+    <string name="uploadCenter">Upload Center</string>
+    <string name="retrieveLog">Retrieve Log</string>
+    <string name="files">Files</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="txtCamera">Camera</string>
+    <string name="txtUploadCenter">Upload Center</string>
+</resources>
