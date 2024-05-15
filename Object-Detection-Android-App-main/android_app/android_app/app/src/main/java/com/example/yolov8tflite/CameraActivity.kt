@@ -188,4 +188,15 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
     }
 
 
+    fun btnClkTwo(caller: View) {
+        val intent = Intent(caller.context, MainJava::class.java)
+        caller.context.startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        super.onBackPressed()
+    }
+
 }

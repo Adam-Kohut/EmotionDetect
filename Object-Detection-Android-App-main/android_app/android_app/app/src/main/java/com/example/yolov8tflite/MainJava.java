@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MainJava {
 
-    private static String emotion;
+    private static int emotion;
     private static float confidenceValue;
 
     private static float[] confArray;
@@ -16,7 +16,7 @@ public class MainJava {
     }
 
 
-    public static void setData(String newValue, float testValue) {
+    public static void setData(int newValue, float testValue) {
         emotion = newValue;
         confidenceValue = testValue;
     }
@@ -34,7 +34,7 @@ public class MainJava {
     }
 
 
-    public static String getEmotion(){
+    public static int getEmotion(){
 
         return emotion;
     }
@@ -64,9 +64,10 @@ public class MainJava {
 
     public static void reset() {
         // Reset internal state here
-        emotion = "";
+        emotion = -1;
         confidenceValue = -1;
         confArray = new float[0];
+        labelArray = new int[0];
     }
 
 }

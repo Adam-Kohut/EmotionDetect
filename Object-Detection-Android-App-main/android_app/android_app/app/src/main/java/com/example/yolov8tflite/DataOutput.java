@@ -1,6 +1,8 @@
 package com.example.yolov8tflite;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -9,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.List;
+import java.util.Arrays;
 
 
 public class DataOutput extends AppCompatActivity {
@@ -28,22 +30,30 @@ public class DataOutput extends AppCompatActivity {
         setContentView(R.layout.activity_data_output);
 
 
-        String emotion = MainJava.getEmotion();
+        int emotion = MainJava.getEmotion();
         float confidence = MainJava.getConf();
         String sConfidence = String.valueOf(confidence);
 
-        String testval = String.valueOf(MainJava.getConfArray().length);
+        String ConfArr = Arrays.toString(MainJava.getConfArray());
+        String LabelArr = Arrays.toString(MainJava.getLabelArray());
 
         TextView nameView = findViewById(R.id.nameView);
-        nameView.setText(emotion);
+        nameView.setText(String.valueOf(emotion));
 
         TextView confView = findViewById(R.id.confView);
         confView.setText(sConfidence);
 
         TextView listView = findViewById(R.id.listView);
-        listView.setText(testval);
+        listView.setText(ConfArr);
 
-
-
+        TextView labelView = findViewById(R.id.labelView);
+        labelView.setText(LabelArr);
     }
+
+    public void onBtnSubmit_Clicked(View Caller) {
+        Intent intent = new Intent(this, LineGraph.class);
+        startActivity(intent);
+    }
+
+
 }

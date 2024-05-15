@@ -145,8 +145,9 @@ class Detector(
                 confArray = confArray + maxConf
                 labelArray = labelArray + maxIdx
 
-                MainJava.setData(clsName, maxConf)
+                MainJava.setData(maxIdx, maxConf)
                 MainJava.setConfArray(confArray)
+                MainJava.setLabelArray(labelArray)
 
 
                 boundingBoxes.add(
