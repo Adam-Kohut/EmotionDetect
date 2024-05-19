@@ -69,7 +69,7 @@
   </androidx.cardview.widget.CardView>
 
   <androidx.cardview.widget.CardView
-      android:id="@+id/uploadCenterCard"
+      android:id="@+id/videoPlaybackCard"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
@@ -111,7 +111,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/uploadCenterCard">
+      app:layout_constraintTop_toBottomOf="@+id/videoPlaybackCard">
 
     <TextView
         android:layout_width="wrap_content"

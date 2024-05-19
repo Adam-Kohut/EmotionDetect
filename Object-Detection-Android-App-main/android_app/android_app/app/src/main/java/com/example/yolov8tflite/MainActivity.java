@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // query views
         cameraCard = findViewById(R.id.cameraCard);
-        uploadCenterCard = findViewById(R.id.uploadCenterCard);
+        uploadCenterCard = findViewById(R.id.videoPlaybackCard);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         cameraCard.setOnClickListener(v -> startActivity(new Intent(this, CameraActivity.class)));
 
         // setup upload center listener
-        uploadCenterCard.setOnClickListener(v -> startActivity(new Intent(this, UploadCenterActivity.class)));
+        uploadCenterCard.setOnClickListener(v -> startActivity(new Intent(this, VideoActivity.class)));
         // setup nav listeners
         // set Home selected
         bottomNavigationView.setSelectedItemId(R.id.home);
