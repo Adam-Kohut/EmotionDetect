@@ -1,4 +1,4 @@
-package com.example.yolov8tflite
+package com.example.EmotionDetect
 
 import android.Manifest
 import android.content.Intent
@@ -18,9 +18,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.yolov8tflite.Constants.LABELS_PATH
-import com.example.yolov8tflite.Constants.MODEL_PATH
-import com.example.yolov8tflite.databinding.ActivityCameraBinding
+import com.example.EmotionDetect.Constants.LABELS_PATH
+import com.example.EmotionDetect.Constants.MODEL_PATH
+import com.example.EmotionDetect.databinding.ActivityCameraBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

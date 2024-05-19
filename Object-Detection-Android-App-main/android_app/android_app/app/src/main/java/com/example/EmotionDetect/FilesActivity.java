@@ -1,4 +1,4 @@
-package com.example.yolov8tflite;
+package com.example.EmotionDetect;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.yolov8tflite.model.MovieFile;
-import com.example.yolov8tflite.model.MovieFileAdapter;
+import com.example.EmotionDetect.model.MovieFile;
+import com.example.EmotionDetect.model.MovieFileAdapter;
 import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;

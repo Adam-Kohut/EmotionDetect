@@ -1,4 +1,7 @@
-package com.example.yolov8tflite;
+package com.example.EmotionDetect;
+
+import static com.example.EmotionDetect.Constants.LABELS_PATH;
+import static com.example.EmotionDetect.Constants.MODEL_PATH;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,8 +23,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
+import java.util.List;
 
-public class VideoActivity extends AppCompatActivity {
+
+public class VideoActivity extends AppCompatActivity implements Detector.DetectorListener{
+
+    private Detector detector;
+    private OverlayView overlayView;
+
+
 
     private static final int REQUEST_VIDEO_PICK = 1;
     private ImageView imageView;
@@ -42,6 +52,7 @@ public class VideoActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         pickVideoButton = findViewById(R.id.pickVideoButton);
+        overlayView = findViewById(R.id.overlay);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -56,6 +67,9 @@ public class VideoActivity extends AppCompatActivity {
         });
 
         handler = new Handler();
+
+        detector = new Detector(this, MODEL_PATH, LABELS_PATH, this);
+        detector.setup();
     }
 
     private void pickVideoFile() {
@@ -109,10 +123,15 @@ public class VideoActivity extends AppCompatActivity {
                         }
                         if (bitmap != null) {
                             imageView.setImageBitmap(bitmap);
+                            if(currentFrameTime % 12 == 0) {
+
+                                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+                                detector.detect(rotatedBitmap);
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        // Handle the exception, for example, stop the slideshow if an error occurs
                         handler.removeCallbacks(updateFrameRunnable);
                         return;
                     }
@@ -127,17 +146,13 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (handler != null && updateFrameRunnable != null) {
-            handler.removeCallbacks(updateFrameRunnable);
-        }
-        if (retriever != null) {
-            try {
-                retriever.release();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public void onDetect(List<BoundingBox> boundingBoxes, long inferenceTime) {
+        overlayView.setResults(boundingBoxes);
+    }
+
+
+    @Override
+    public void onEmptyDetect() {
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.yolov8tflite;
+package com.example.EmotionDetect;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

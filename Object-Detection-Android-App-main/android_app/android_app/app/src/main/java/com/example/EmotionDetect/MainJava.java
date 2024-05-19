@@ -1,7 +1,4 @@
-package com.example.yolov8tflite;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.EmotionDetect;
 
 public class MainJava {
 

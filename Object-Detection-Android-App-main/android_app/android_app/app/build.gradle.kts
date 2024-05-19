@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.yolov8tflite"
+    namespace = "com.example.EmotionDetect"
     compileSdk = 34
 
     defaultConfig {

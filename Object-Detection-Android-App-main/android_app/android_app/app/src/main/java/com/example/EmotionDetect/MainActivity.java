@@ -1,4 +1,4 @@
-package com.example.yolov8tflite;
+package com.example.EmotionDetect;
 
 import android.content.Intent;
 import android.os.Bundle;

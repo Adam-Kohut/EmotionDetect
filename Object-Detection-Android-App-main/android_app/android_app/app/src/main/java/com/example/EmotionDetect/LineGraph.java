@@ -1,4 +1,4 @@
-package com.example.yolov8tflite;
+package com.example.EmotionDetect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +17,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

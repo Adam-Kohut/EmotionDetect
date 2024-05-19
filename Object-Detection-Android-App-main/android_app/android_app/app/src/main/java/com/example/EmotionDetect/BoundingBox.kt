@@ -1,4 +1,4 @@
-package com.example.yolov8tflite
+package com.example.EmotionDetect
 
 data class BoundingBox(
     val x1: Float,

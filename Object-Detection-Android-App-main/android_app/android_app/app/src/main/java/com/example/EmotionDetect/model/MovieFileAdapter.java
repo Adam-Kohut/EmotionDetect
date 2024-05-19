@@ -1,4 +1,4 @@
-package com.example.yolov8tflite.model;
+package com.example.EmotionDetect.model;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.yolov8tflite.R;
+import com.example.EmotionDetect.R;
 
 import java.util.List;
 
