@@ -72,6 +72,9 @@ public class DataOutput extends AppCompatActivity {
 
     public void on2BtnSubmit_Clicked(View Caller) {
 
+        String ConfArr = Arrays.toString(MainJava.getConfArray());
+        String LabelArr = Arrays.toString(MainJava.getLabelArray());
+
         int[] labelArray =  MainJava.getLabelArray();
         int angerQuant = 0;
         int disgustQuant = 0;
@@ -158,12 +161,18 @@ public class DataOutput extends AppCompatActivity {
                 /* Map<String, String> with key value pairs as data load */
                 Map<String, String> params = new HashMap<>();
                 //params.put("file_name", "Test");
+                params.put("userid", String.valueOf(1));
+                params.put("logtitle", "Test");
+                params.put("labelarray", LabelArr);
+                params.put("confidencearray", ConfArr);
                 params.put("happinesspercentage", String.valueOf(happyPerc));
                 params.put("sadnesspercentage", String.valueOf(sadPerc));
                 params.put("fearpercentage", String.valueOf(fearPerc));
                 params.put("angerpercentage", String.valueOf(angerPerc));
                 params.put("disgustpercentage", String.valueOf(disgustPerc));
                 params.put("surprisepercentage",  String.valueOf(surprisePerc));
+
+
 
                 //params.put("LabelArray", Arrays.toString(MainJava.getLabelArray()));
                 //params.put("ConfidenceArray", Arrays.toString(MainJava.getConfArray()));
