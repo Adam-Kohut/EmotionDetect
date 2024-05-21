@@ -16,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     private CardView cameraCard;
     private CardView uploadCenterCard;
+
+    private CardView LoginCard;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // query views
         cameraCard = findViewById(R.id.cameraCard);
         uploadCenterCard = findViewById(R.id.videoPlaybackCard);
+        LoginCard = findViewById(R.id.retrieveLogCard);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         // setup upload center listener
         uploadCenterCard.setOnClickListener(v -> startActivity(new Intent(this, VideoActivity.class)));
+
+
+        LoginCard.setOnClickListener(v -> startActivity(new Intent(this, CameraActivity.class)));
         // setup nav listeners
         // set Home selected
         bottomNavigationView.setSelectedItemId(R.id.home);

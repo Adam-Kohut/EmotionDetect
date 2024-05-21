@@ -48,6 +48,9 @@ public class VideoActivity extends AppCompatActivity implements Detector.Detecto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MainJava.reset();
+
         setContentView(R.layout.activity_video);
 
         imageView = findViewById(R.id.imageView);
@@ -123,11 +126,9 @@ public class VideoActivity extends AppCompatActivity implements Detector.Detecto
                         }
                         if (bitmap != null) {
                             imageView.setImageBitmap(bitmap);
-                            if(currentFrameTime % 12 == 0) {
+                            if(currentFrameTime % 24 == 0) {
 
-                                Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-                                detector.detect(rotatedBitmap);
+                                detector.detect(bitmap);
                             }
                         }
                     } catch (Exception e) {
