@@ -60,6 +60,7 @@ public class LineGraph extends AppCompatActivity {
         yAxis.setAxisMinimum(0.001f);
         yAxis.setAxisMaximum(1f);
         yAxis.setAxisLineWidth(2f);
+        yAxis.setTextColor(Color.WHITE);
         yAxis.setAxisLineColor(Color.BLACK);
         yAxis.setLabelCount(10);
 
@@ -160,21 +161,27 @@ public class LineGraph extends AppCompatActivity {
 
         LineDataSet dataSet0 = new LineDataSet(Anger, "Anger");
         dataSet0.setColor(Color.RED);
+        dataSet0.setDrawCircles(false);
 
         LineDataSet dataSet1 = new LineDataSet(Disgust, "Disgust");
         dataSet1.setColor(Color.GREEN);
+        dataSet1.setDrawCircles(false);
 
         LineDataSet dataSet2 = new LineDataSet(Fear, "Fear");
         dataSet2.setColor(Color.MAGENTA);
+        dataSet2.setDrawCircles(false);
 
         LineDataSet dataSet3 = new LineDataSet(Happiness, "Happiness");
         dataSet3.setColor(Color.YELLOW);
+        dataSet3.setDrawCircles(false);
 
         LineDataSet dataSet4 = new LineDataSet(Sadness, "Sadness");
         dataSet4.setColor(Color.BLUE);
+        dataSet4.setDrawCircles(false);
 
         LineDataSet dataSet5 = new LineDataSet(Surprise, "Surprise");
         dataSet5.setColor(Color.CYAN);
+        dataSet5.setDrawCircles(false);
 
 
 

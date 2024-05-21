@@ -56,10 +56,20 @@ public class DataOutput extends AppCompatActivity {
         confView.setText(sConfidence);
 
         TextView listView = findViewById(R.id.listView);
-        listView.setText(ConfArr);
+        if(ConfArr == "[]"){
+            listView.setText("No Data Entered");
+        }
+        else{
+            listView.setText("Confidence Values Verified");
+        }
 
         TextView labelView = findViewById(R.id.labelView);
-        labelView.setText(LabelArr);
+        if(LabelArr == "[]"){
+            labelView.setText("No Data Entered");
+        }
+        else{
+            labelView.setText("Label Values Verified");
+        }
 
 
 
