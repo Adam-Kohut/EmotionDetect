@@ -6,20 +6,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 public class MovieFile {
+    private int fileId;
     private int userId; // will be used to fetch the files only for a specific user when login system is implemented.
     private String fileName;
-    private float happinessPercentage;
-    private float sadnessPercentage;
-    private float fearPercentage;
-    private float angerPercentage;
-    private float disgustPercentage;
-    private float surprisePercentage;
+    private double happinessPercentage;
+    private double sadnessPercentage;
+    private double fearPercentage;
+    private double angerPercentage;
+    private double disgustPercentage;
+    private double surprisePercentage;
     private String dateCreated; //TODO: change to date format later.
 
-    public MovieFile(String fileName, float happinessPercentage, float sadnessPercentage, float fearPercentage, float angerPercentage, float disgustPercentage, float surprisePercentage, Timestamp dateCreated) {
-        this.userId = 1; // TODO: change later!
+    public MovieFile(int fileId, int userId, String fileName, float happinessPercentage, float sadnessPercentage, float fearPercentage, float angerPercentage, float disgustPercentage, float surprisePercentage, Timestamp dateCreated) {
+        this.fileId = fileId;
+        this.userId = userId;
         this.fileName = fileName;
         this.dateCreated = String.valueOf(dateCreated);
         this.happinessPercentage = happinessPercentage;
@@ -28,34 +31,58 @@ public class MovieFile {
         this.angerPercentage = angerPercentage;
         this.disgustPercentage = disgustPercentage;
         this.surprisePercentage = surprisePercentage;
-        // note: id is automatically set in DB and userId is fetched from DB.
+    }
+
+    public MovieFile(JSONObject o, int userId) {
+        this.userId = userId;
+        DecimalFormat df = new DecimalFormat("#.#");
+        try {
+            // exception block.
+            this.fileId = o.getInt("id");
+            this.fileName = o.getString("filename");
+            this.dateCreated = o.getString("date");
+            // percentage = * 100 and then other 10 is used to round of to 1 decimal places.
+            this.happinessPercentage = Math.round(o.getDouble("happiness_percentage") * 1000) / 10.0;
+            this.sadnessPercentage = Math.round(o.getDouble("sadness_percentage") * 1000) / 10.0;
+            this.fearPercentage = Math.round(o.getDouble("fear_percentage") * 1000) / 10.0;
+            this.angerPercentage = Math.round(o.getDouble("anger_percentage") * 1000) / 10.0;
+            this.disgustPercentage = Math.round(o.getDouble("disgust_percentage") * 1000) / 10.0;
+            this.surprisePercentage = Math.round(o.getDouble("surprise_percentage") * 1000) / 10.0;
+
+        } catch (JSONException e) {
+            Log.e("database", e.getLocalizedMessage(), e);
+        }
+    }
+
+    public int getFileId() {
+        return fileId;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public float getHappinessPercentage() {
+    public double getHappinessPercentage() {
         return happinessPercentage;
     }
 
-    public float getSadnessPercentage() {
+    public double getSadnessPercentage() {
         return sadnessPercentage;
     }
 
-    public float getFearPercentage() {
+    public double getFearPercentage() {
         return fearPercentage;
     }
 
-    public float getAngerPercentage() {
+    public double getAngerPercentage() {
         return angerPercentage;
     }
 
-    public float getDisgustPercentage() {
+    public double getDisgustPercentage() {
         return disgustPercentage;
     }
 
-    public float getSurprisePercentage() {
+    public double getSurprisePercentage() {
         return surprisePercentage;
     }
 
@@ -63,14 +90,8 @@ public class MovieFile {
         return dateCreated;
     }
 
-    public MovieFile(JSONObject o) {
-        try {
-            // exception block.
-            fileName = o.getString("file_name");
-            dateCreated = o.getString("date");
-        } catch (JSONException e) {
-            Log.e("database", e.getLocalizedMessage(), e);
-        }
+    public int getUserId() {
+        return userId;
     }
 
     /**

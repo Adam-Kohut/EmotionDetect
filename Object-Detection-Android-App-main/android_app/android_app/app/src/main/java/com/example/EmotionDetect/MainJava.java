@@ -9,6 +9,8 @@ public class MainJava {
 
     private static int[] labelArray;
 
+    private static String filename;
+
     private MainJava(){
     }
 
@@ -27,6 +29,12 @@ public class MainJava {
     public static void setLabelArray(int[] values){
 
         labelArray = values;
+
+    }
+
+    public static void setFilename(String values){
+
+        filename = values;
 
     }
 
@@ -54,6 +62,11 @@ public class MainJava {
         return labelArray;
     }
 
+    public static String getFilename(){
+
+        return filename;
+    }
+
 
 
 
@@ -65,6 +78,7 @@ public class MainJava {
         confidenceValue = -1;
         confArray = new float[0];
         labelArray = new int[0];
+        filename = "";
     }
 
 }

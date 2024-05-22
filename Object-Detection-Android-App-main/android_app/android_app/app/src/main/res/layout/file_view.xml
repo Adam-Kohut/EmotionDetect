@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:padding="4dp"
@@ -9,26 +10,92 @@
     android:layout_marginRight="8dp"
     app:cardCornerRadius="16dp"
     >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardContentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <TextView
             android:id="@+id/fileName"
-            android:layout_width="209dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/fileDateCreated"
-            android:layout_width="209dp"
-            android:layout_height="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="Date created:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fileName" />
+
+        <TextView
+            android:id="@+id/txtHappiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/txtFear"
+            app:layout_constraintEnd_toStartOf="@+id/txtFear"
+            app:layout_constraintTop_toTopOf="@+id/txtFear" />
+
+        <TextView
+            android:id="@+id/txtSadness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/txtHappiness"
+            app:layout_constraintTop_toTopOf="@+id/fileDateCreated" />
+
+        <TextView
+            android:id="@+id/txtFear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSurprise"
+            app:layout_constraintEnd_toStartOf="@+id/txtSurprise"
+            app:layout_constraintTop_toTopOf="@+id/txtSurprise" />
+
+        <TextView
+            android:id="@+id/txtAnger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSadness"
+            app:layout_constraintEnd_toStartOf="@+id/txtDisgust"
+            app:layout_constraintTop_toTopOf="@+id/txtSadness" />
+
+        <TextView
+            android:id="@+id/txtDisgust"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txtAnger"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/txtSurprise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

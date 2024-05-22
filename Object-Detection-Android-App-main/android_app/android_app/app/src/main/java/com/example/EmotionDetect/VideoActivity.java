@@ -23,7 +23,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class VideoActivity extends AppCompatActivity implements Detector.DetectorListener{
@@ -48,8 +50,6 @@ public class VideoActivity extends AppCompatActivity implements Detector.Detecto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        MainJava.reset();
 
         setContentView(R.layout.activity_video);
 
@@ -115,6 +115,7 @@ public class VideoActivity extends AppCompatActivity implements Detector.Detecto
     }
 
     private void startSlideshow() {
+        MainJava.reset();
         updateFrameRunnable = new Runnable() {
             @Override
             public void run() {
@@ -156,4 +157,14 @@ public class VideoActivity extends AppCompatActivity implements Detector.Detecto
     public void onEmptyDetect() {
 
     }
+
+    public void onBtnSubmit_Clicked(View Caller) {
+        String logName = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis());
+        MainJava.setFilename(logName);
+        Intent intent = new Intent(this, DataOutput.class);
+        startActivity(intent);
+    }
+
+
+
 }

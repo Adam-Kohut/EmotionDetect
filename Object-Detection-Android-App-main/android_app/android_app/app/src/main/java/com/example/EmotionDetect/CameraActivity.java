@@ -126,7 +126,7 @@ public class CameraActivity extends AppCompatActivity implements Detector.Detect
             public void run() {
                 if (isRecording) {
                     captureBitmap();
-                    handler.postDelayed(this, 100); // Schedule next capture in 1 second
+                    handler.postDelayed(this, 1000); // Schedule next capture in 1 second
                 }
             }
         };
@@ -134,6 +134,7 @@ public class CameraActivity extends AppCompatActivity implements Detector.Detect
 
     public void captureVideo() {
         capture.setImageResource(R.drawable.round_stop_circle_24);
+        MainJava.reset();
         Recording recording1 = recording;
         if (recording1 != null) {
             recording1.stop();
@@ -144,6 +145,8 @@ public class CameraActivity extends AppCompatActivity implements Detector.Detect
             return;
         }
         String name = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.getDefault()).format(System.currentTimeMillis());
+        String logName = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis());
+        MainJava.setFilename(logName);
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4");

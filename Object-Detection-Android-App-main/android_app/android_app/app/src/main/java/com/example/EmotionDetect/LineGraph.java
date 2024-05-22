@@ -39,6 +39,7 @@ public class LineGraph extends AppCompatActivity {
         description.setTextColor(Color.WHITE);
         description.setPosition(150f, 15f);
         lineChart.setDescription(description);
+
         lineChart.getAxisRight().setDrawLabels(false);
 
         int[] labelArr = MainJava.getLabelArray();
@@ -55,6 +56,7 @@ public class LineGraph extends AppCompatActivity {
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
         xAxis.setLabelCount(labelArr.length);
         xAxis.setGranularity(1f);
+        xAxis.setTextColor(Color.WHITE);
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setAxisMinimum(0.001f);

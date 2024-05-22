@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".CameraActivity">
+    tools:context=".MainActivity">
 
   <TextView
       android:id="@+id/textView"
@@ -14,7 +14,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="20dp"
       android:layout_marginTop="20dp"
-      android:text="EmotionDetect"
+      android:text="@string/app_name"
       android:textColor="@color/white"
       android:textSize="36sp"
       app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
       android:id="@+id/cameraCard"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="60dp"
+      android:layout_marginTop="100dp"
       app:cardBackgroundColor="@color/blue"
       app:cardCornerRadius="5dp"
       app:cardElevation="10dp"
@@ -69,7 +69,7 @@
   </androidx.cardview.widget.CardView>
 
   <androidx.cardview.widget.CardView
-      android:id="@+id/videoPlaybackCard"
+      android:id="@+id/uploadCenterCard"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
@@ -90,7 +90,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Video Playback"
+        android:text="@string/uploadCenter"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -98,7 +98,7 @@
   </androidx.cardview.widget.CardView>
 
   <androidx.cardview.widget.CardView
-      android:id="@+id/retrieveLogCard"
+      android:id="@+id/signUpCard"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
@@ -111,15 +111,47 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/videoPlaybackCard">
+      app:layout_constraintTop_toBottomOf="@+id/uploadCenterCard">
 
     <TextView
+        android:id="@+id/txtSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/retrieveLog"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/logOutCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      app:cardBackgroundColor="@color/blue"
+      app:cardCornerRadius="5dp"
+      app:cardElevation="10dp"
+      app:cardMaxElevation="12dp"
+      app:cardPreventCornerOverlap="true"
+      app:cardUseCompatPadding="true"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/uploadCenterCard"
+      android:visibility="gone">
+
+    <TextView
+        android:id="@+id/txtLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Log Out"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -138,4 +170,15 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:menu="@menu/menu_navigation" />
+
+  <TextView
+      android:id="@+id/txtUserName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Welcome!"
+      android:textColor="@color/white"
+      android:textSize="20sp"
+      app:layout_constraintBottom_toTopOf="@+id/cameraCard"
+      app:layout_constraintStart_toStartOf="@+id/textView2"
+      app:layout_constraintTop_toBottomOf="@+id/divider" />
 </androidx.constraintlayout.widget.ConstraintLayout>
