@@ -134,7 +134,6 @@ public class CameraActivity extends AppCompatActivity implements Detector.Detect
 
     public void captureVideo() {
         capture.setImageResource(R.drawable.round_stop_circle_24);
-        MainJava.reset();
         Recording recording1 = recording;
         if (recording1 != null) {
             recording1.stop();

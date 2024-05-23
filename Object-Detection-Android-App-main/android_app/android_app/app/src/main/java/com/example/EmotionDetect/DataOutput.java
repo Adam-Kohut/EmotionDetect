@@ -122,6 +122,7 @@ public class DataOutput extends AppCompatActivity {
 
         if(!inputText.isEmpty()){
             filename = inputText;
+            filename = inputText.replace(" ", "");
         }
 
 
