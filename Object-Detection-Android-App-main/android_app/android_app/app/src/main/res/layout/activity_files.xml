@@ -14,9 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="268dp"
         android:text="Files"
         android:textColor="@color/white"
         android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnRefreshFiles"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,23 +32,24 @@
         app:layout_constraintTop_toBottomOf="@+id/titleFiles" />
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="643dp"-->
-<!--        android:paddingLeft="50dp"-->
-<!--        android:paddingTop="20dp"-->
-<!--        android:paddingRight="50dp"-->
-<!--        android:paddingBottom="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/divider3" />-->
+    <!--        android:layout_width="409dp"-->
+    <!--        android:layout_height="643dp"-->
+    <!--        android:paddingLeft="50dp"-->
+    <!--        android:paddingTop="20dp"-->
+    <!--        android:paddingRight="50dp"-->
+    <!--        android:paddingBottom="20dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/divider3" />-->
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:gravity="right"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/titleFiles"
+        app:layout_constraintEnd_toStartOf="@+id/btnFilter"
         app:layout_constraintTop_toTopOf="@+id/titleFiles"
         app:layout_constraintWidth_max="200dp">
 
@@ -58,9 +61,23 @@
             android:background="@drawable/search_view_bg"
             app:queryHint="Search Files"
             app:searchIcon="@drawable/ic_search"
-            tools:layout_editor_absoluteX="95dp"
-            tools:layout_editor_absoluteY="20dp" />
+            android:visibility="invisible"/>
     </RelativeLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/white"
+        app:indicatorSize="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:showAnimationBehavior="outward"
+        app:trackThickness="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filesDisplayView"
@@ -69,8 +86,10 @@
         android:layout_marginTop="40dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -83,7 +102,45 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation"
-        />
+        app:menu="@menu/menu_navigation" />
 
+    <ImageButton
+        android:id="@+id/btnRefreshFiles"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titleFiles"
+        app:layout_constraintTop_toTopOf="@+id/btnFilter"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btnFilter"
+        android:visibility="invisible"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="filter icon"
+        android:padding="0dp"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/btnRefreshFiles"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!-- Transparent overlay layout -->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/overlayLayout"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        android:visibility="gone" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

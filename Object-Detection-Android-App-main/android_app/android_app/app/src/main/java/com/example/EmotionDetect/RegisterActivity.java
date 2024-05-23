@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (
                 password.equals(passwordConfirmation) &&
-                name.isEmpty() &&
+                !name.isEmpty() &&
                 !password.isEmpty() &&
                 !email.isEmpty()
             )
@@ -95,10 +95,9 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("test", String.valueOf(response));
-                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        finish();
+                        Log.d("Register", String.valueOf(response));
+                        // based on response value, account will be made or not made.
+                        pushToDB(response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -121,5 +120,29 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
+    }
+
+    private void pushToDB(String response) {
+        // note: bad practice as DB can be changed but more efficient
+        // than having to fetch and search through the whole userlist!
+        response = response.toLowerCase();
+        if (response.equals("[]")) { // on success
+            Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        } else { // duplicate present.
+            if(response.contains("user_name") && response.contains("duplicate")) {
+                Toast.makeText(getApplicationContext(), "User name already exists. Choose another.", Toast.LENGTH_SHORT).show();
+            }
+            if(response.contains("email_address") && response.contains("duplicate")) {
+                Toast.makeText(getApplicationContext(), "Email address already exists. Choose another.", Toast.LENGTH_SHORT).show();
+            }
+
+            txtName.getText().clear();
+            txtEmail.getText().clear();
+            txtPassword.getText().clear();
+            txtPasswordConfirmed.getText().clear();
+
+        }
     }
 }

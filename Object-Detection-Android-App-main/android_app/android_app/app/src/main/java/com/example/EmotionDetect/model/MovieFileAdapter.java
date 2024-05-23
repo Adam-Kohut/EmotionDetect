@@ -24,8 +24,19 @@ import java.util.List;
 public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.ViewHolder> implements Filterable {
     private List<MovieFile> movieFileList;
     private List<MovieFile> movieFileListFull;
+    private onFileCardClickListener listener;
+
+
+    public interface onFileCardClickListener {
+        /**
+         * Function that will execute an onfilecard click callback where filename string has been passed.
+         */
+        void onFileCardClick(String fileName);
+    }
+
 
     // Definition of ViewHolder for adapter to hold the views.
+    // interface to handle the on file click listener.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView file;
         public TextView fileName;
@@ -36,6 +47,7 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
         public TextView txtAnger;
         public TextView txtDisgust;
         public TextView txtSurprise;
+
 
         public ViewHolder(View fileView) {
             super(fileView);
@@ -48,14 +60,9 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
             txtAnger = file.findViewById(R.id.txtAnger);
             txtDisgust = file.findViewById(R.id.txtDisgust);
             txtSurprise = file.findViewById(R.id.txtSurprise);
-
-            file.setOnClickListener(v -> {
-                Context context = fileView.getContext();
-                Toast.makeText(context, "Test succeeded", Toast.LENGTH_LONG).show();
-            });
         }
 
-        public void bindData(MovieFile movieFile) {
+        public void bindData(MovieFile movieFile, onFileCardClickListener listener) {
             fileName.setText(movieFile.getFileName());
             fileDateCreated.setText(movieFile.getDateCreated());
             txtHappiness.setText(String.valueOf(movieFile.getHappinessPercentage()));
@@ -65,16 +72,16 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
             txtDisgust.setText(String.valueOf(movieFile.getDisgustPercentage()));
             txtSurprise.setText(String.valueOf(movieFile.getSurprisePercentage()));
 
-            file.setOnLongClickListener(new View.OnLongClickListener() {
+            file.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
                     // Create and show modal dialog with file information and progress bars
                     Context context = file.getContext();
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_file_info, null);
                     builder.setView(dialogView);
 
-                    // set bg color of the dialog view
+                    // Set background color of the dialog view
                     dialogView.setBackgroundColor(ContextCompat.getColor(context, R.color.lightGrey));
 
                     TextView dialogFileName = dialogView.findViewById(R.id.dialogFileName);
@@ -92,7 +99,7 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
                     ProgressBar progressBarDisgust = dialogView.findViewById(R.id.circularProgressDisgust);
                     ProgressBar progressBarSurprise = dialogView.findViewById(R.id.circularProgressSurprise);
 
-                    // setting txtviews in dialog
+                    // Setting text views in dialog
                     dialogFileName.setText(fileName.getText());
                     dialogFileDateCreated.setText(fileDateCreated.getText());
                     dialogTxtHappiness.setText(String.valueOf(Math.round(movieFile.getHappinessPercentage())) + "%");
@@ -110,24 +117,27 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
                     progressBarDisgust.setProgress((int) movieFile.getDisgustPercentage());
                     progressBarSurprise.setProgress((int) movieFile.getSurprisePercentage());
 
-//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            // Dismiss the dialog
-//                            dialog.dismiss();
-//                        }
-//                    });
-
                     builder.create().show();
+                }
+            });
+
+            file.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Context context = file.getContext();
+                    Toast.makeText(context, "Opening file page", Toast.LENGTH_LONG).show();
+                    listener.onFileCardClick(fileName.getText().toString());
                     return true; // Return true to consume the long click event
                 }
             });
         }
     }
 
-    public MovieFileAdapter(List<MovieFile> movieFileList) {
+    public MovieFileAdapter(List<MovieFile> movieFileList, onFileCardClickListener listener) {
         this.movieFileList = movieFileList;
         this.movieFileListFull = new ArrayList<>(movieFileList);
+        // listener defining the onfilecard click callback method
+        this.listener = listener;
     }
 
     @Override
@@ -152,7 +162,7 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
         // Get data element
         MovieFile movieFile = movieFileList.get(position);
         // Set views in view of element in list. (from single view xml file)
-        holder.bindData(movieFile);
+        holder.bindData(movieFile, listener);
     }
 
     public void setFilteredList(List<MovieFile> list) {
@@ -195,4 +205,12 @@ public class MovieFileAdapter extends RecyclerView.Adapter<MovieFileAdapter.View
             notifyDataSetChanged();
         }
     };
+
+    public void setMovieFileList(List<MovieFile> movieFileList) {
+        this.movieFileList = movieFileList;
+    }
+
+    public void setMovieFileListFull(List<MovieFile> movieFileListFull) {
+        this.movieFileListFull = movieFileListFull;
+    }
 }

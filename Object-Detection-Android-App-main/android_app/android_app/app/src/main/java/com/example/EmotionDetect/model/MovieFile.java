@@ -62,6 +62,10 @@ public class MovieFile {
         return fileName;
     }
 
+    public String getFileNameToLower() {
+        return fileName.toLowerCase();
+    }
+
     public double getHappinessPercentage() {
         return happinessPercentage;
     }

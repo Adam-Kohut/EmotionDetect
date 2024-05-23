@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="File Name"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -20,6 +21,7 @@
     <TextView
         android:id="@+id/dialogFileDateCreated"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:text="Date Created: "
         android:layout_marginBottom="16dp"/>
@@ -44,6 +46,7 @@
                 android:id="@+id/txtProgressHappiness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Happiness" />
 
@@ -97,6 +100,7 @@
                 android:id="@+id/txtProgressSadness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Sadness" />
 
@@ -148,6 +152,7 @@
                 android:id="@+id/txtProgressFear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Fear" />
 
@@ -200,6 +205,7 @@
                 android:id="@+id/txtProgressAnger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Anger" />
 
@@ -253,6 +259,7 @@
                 android:id="@+id/txtProgressDisgust"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Disgust" />
 
@@ -306,6 +313,7 @@
                 android:id="@+id/txtProgressSurprise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:text="Surprise" />
 

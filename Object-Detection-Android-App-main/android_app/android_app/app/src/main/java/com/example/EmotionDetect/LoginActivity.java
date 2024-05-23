@@ -28,10 +28,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+// TODO: setup forgot password
 public class LoginActivity extends AppCompatActivity {
 
     private TextView txtGoRegister;
-    private EditText inputEmail, inputPassword;
+    private EditText inputEmailOrUsername, inputPassword;
     private Button btnLogin;
     private final String USER_CHECK_URL = "https://studev.groept.be/api/a23pt314/is_account_present";
     TextView txtForgotPassword;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // fetch views-
         txtGoRegister = findViewById(R.id.txtNoAccountClickable);
-        inputEmail = findViewById(R.id.inputEmail);
+        inputEmailOrUsername = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         btnLogin = findViewById(R.id.btnLogin);
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
@@ -57,12 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         // setup going to register page
         txtGoRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
 
-        // TODO: setup forgot password
 
         // super btnLogin listener.
         btnLogin.setOnClickListener(v -> {
             Log.d("Login", "Login button pressed");
-            String email = String.valueOf(inputEmail.getText());
+            String emailOrUsername = String.valueOf(inputEmailOrUsername.getText());
             String password = String.valueOf(inputPassword.getText());
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             StringRequest request = new StringRequest(
@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject user = arr.getJSONObject(0);
                                 String userId = user.getString("id");
                                 Log.d("Login", "received user id: " + userId);
-
 //                                // Save login state and userId to SharedPreferences
                                 SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -93,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else { // login unsuccessful
                                 Log.d("Login", "Login failed: invalid credentials");
-                                Toast.makeText(getApplicationContext(), "Please fill in your email and password", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Your email or password is incorrect!", Toast.LENGTH_SHORT).show();
+                                
                             }
                         } catch (JSONException e) {
                             Log.d("Login", "JSON parsing error: " + e.getMessage());
@@ -110,7 +110,8 @@ public class LoginActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("password", password);
-                    params.put("email", email);
+                    params.put("email", emailOrUsername);
+                    params.put("username", emailOrUsername);
                     return params;
                 }
             };

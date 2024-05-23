@@ -9,4 +9,11 @@
     <string name="txtCamera">Camera</string>
     <string name="txtUploadCenter">Upload Center</string>
     <string name="welcome_message_anonymous">Welcome! Consider signing up above.</string>
+    <string-array name="sorting_filter_array">
+        <item>None</item>
+        <item>A-Z</item>
+        <item>Z-A</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
