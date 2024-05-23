@@ -3,8 +3,6 @@ package com.example.EmotionDetect;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.telephony.SignalStrengthUpdateRequest;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;

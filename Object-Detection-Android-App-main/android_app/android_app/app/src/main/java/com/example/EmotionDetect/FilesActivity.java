@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.EmotionDetect.model.FilterCriteria;
 import com.example.EmotionDetect.model.MovieFile;
 import com.example.EmotionDetect.model.MovieFileAdapter;
 import com.google.android.material.navigation.NavigationBarView;
@@ -78,7 +81,7 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
         progressIndicator = findViewById(R.id.progressIndicator);
 
         //check if user is logged in
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = filesView.getContext().getSharedPreferences("UserPreferences", MODE_PRIVATE);
         Log.d("Shared prefs", sharedPreferences.toString());
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
@@ -106,8 +109,46 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
         // set up navigation bar
         setUpNavBar();
 
+        // set up context menu
+        if(isLoggedIn)
+            registerForContextMenu(filesView);
 //        setUpOverlayLayout();
     }
+
+
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater inflater = new MenuInflater(this);
+//        inflater.inflate(R.menu.context_menu_file_view, menu);
+//    }
+
+//    @Override
+//    public boolean onContextItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        int position;
+//        try {
+//            position = (int) info.targetView.getTag();
+//
+//        Toast.makeText(this, "position clicked: " + String.valueOf(position), Toast.LENGTH_SHORT).show();
+//        if (id == R.id.itemEdit) {
+//            editFileName();
+//            return true;
+//        } else if (id == R.id.itemDelete) {
+//            deleteMyFile();
+//            return true;
+//        } else if (id == R.id.itemShare) {
+//            shareFile();
+//            return true;
+//        } else
+//            return super.onContextItemSelected(item);
+//
+//        } catch (NullPointerException e) {
+//            Log.e("Error", "no menu info present. Error message: " + e.getMessage());
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
     private void setUpSearchView() {
         // making view visible as user is logged in
@@ -126,7 +167,7 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
             ImageView closeButton = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
             closeButton.setColorFilter(Color.WHITE);
             // Align hint text to the left
-            mSearchSrcTextView.setGravity(android.view.Gravity.START | android.view.Gravity.CENTER_VERTICAL);
+            mSearchSrcTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
             // Ensure no padding is causing the hint to be centered
             mSearchSrcTextView.setPadding(0, 0, 0, 0);
@@ -207,10 +248,21 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
                         // processing files fetching.
                         processJSONResponse(response, userId);
                         // creating file adapter here in order to always include the original list elements (both for search and filter)
-                        fileAdapter = new MovieFileAdapter(files, new MovieFileAdapter.onFileCardClickListener() {
+                        fileAdapter = new MovieFileAdapter(files, new MovieFileAdapter.OnFileCardClickListener() {
                             @Override
                             public void onFileCardClick(String fileName) {
                                 startFileActivity(fileName);
+                            }
+                        }, new MovieFileAdapter.OnFileEditAndRemoveListener() {
+
+                            @Override
+                            public void onFileEdit(int listPosition, String newFilename) {
+                                editFileListFull(listPosition, newFilename);
+                            }
+
+                            @Override
+                            public void onFileRemove(int listPosition) {
+                                removeFromFileListFull(listPosition);
                             }
                         });
                         //set up recyclerView.
@@ -220,6 +272,7 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
                         filesFull = new ArrayList<>(files);
                         // hiding progress indicator
                         hideProgressIndicator();
+                        Log.d("Database", "user files have been successfully retrieved");
                     }
                 },
                 error -> {
@@ -228,6 +281,7 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
                             FilesActivity.this,
                             "Unable to communicate with the server",
                             Toast.LENGTH_LONG).show();
+                    Log.d("Database", "Unable to communicate with server");
                 });
         requestQueue.add(queueRequest);
     }
@@ -249,6 +303,7 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
     private void setUpRecycleView() {
         filesView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         filesView.setAdapter(fileAdapter);
+        filesView.setItemAnimator(new DefaultItemAnimator());
     }
 
 
@@ -357,5 +412,14 @@ public class FilesActivity extends AppCompatActivity implements FilterBottomShee
         Intent intent = new Intent(this, FileActivity.class);
         intent.putExtra("fileName", fileName);
         startActivity(intent);
+    }
+
+    private void editFileListFull(int position, String newFilename) {
+        MovieFile fileItemFull = filesFull.get(position);
+        fileItemFull.setFileName(newFilename);
+    }
+
+    private void removeFromFileListFull(int position) {
+        filesFull.remove(position);
     }
 }

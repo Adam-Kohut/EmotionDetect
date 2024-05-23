@@ -2,6 +2,8 @@ package com.example.EmotionDetect.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,8 +12,27 @@ import java.text.DecimalFormat;
 
 public class MovieFile {
     private int fileId;
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     private int userId; // will be used to fetch the files only for a specific user when login system is implemented.
     private String fileName;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Filename: " + fileName + "\n" +
+                "Happiness: " + Math.round(happinessPercentage) + "%\n" +
+                "Sadness: " + Math.round(sadnessPercentage) + "%\n" +
+                "Fear: " + Math.round(fearPercentage) + "%\n" +
+                "Anger: " + Math.round(angerPercentage) + "%\n" +
+                "Disgust: " + Math.round(disgustPercentage) + "%\n" +
+                "Surprise: " + Math.round(surprisePercentage) + "%\n";
+    }
+
+
     private double happinessPercentage;
     private double sadnessPercentage;
     private double fearPercentage;
